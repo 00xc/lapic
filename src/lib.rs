@@ -1,5 +1,6 @@
 #![cfg_attr(not(test), no_std)]
 #![forbid(unsafe_code)]
+#![forbid(missing_docs)]
 
 //! A self-contained crate implementing safe types for the local APIC
 //! registers on x86_64 systems.
