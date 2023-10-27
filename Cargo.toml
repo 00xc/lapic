@@ -2,6 +2,11 @@
 name = "lapic"
 version = "0.1.0"
 edition = "2021"
+license-file = "LICENSE"
+description = "A self-contained crate implementing safe types for the local APIC registers on x86_64 systems."
+readme = "README.md"
+repository = "https://github.com/00xc/lapic"
+keywords = ["x86", "apic", "lapic"]
 
 [dependencies]
 modular-bitfield = "0.11.2"
