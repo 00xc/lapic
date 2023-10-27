@@ -29,7 +29,7 @@ use modular_bitfield::specifiers::*;
 
 /// Local APIC registers.
 #[repr(C, align(16))]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct LocalApic {
 	__reserved1: [Reserved; 2],
 	/// APIC ID Register.
@@ -88,12 +88,12 @@ pub struct LocalApic {
 }
 
 #[repr(transparent)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 struct Reserved([u32; 4]);
 
 /// Local APIC register.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct ApicId {
 	#[skip]
 	__: B24,
@@ -106,7 +106,7 @@ pub struct ApicId {
 
 /// ACIC Version Register.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct ApicVersion {
 	pub version: u8,
 	#[skip]
@@ -122,7 +122,7 @@ pub struct ApicVersion {
 /// [`APR`](LocalApic::arb_priority) or
 /// [`PPR`](LocalApic::processor_priority).
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct PriorityRegister {
 	pub priority: u8,
 	#[skip]
@@ -133,7 +133,7 @@ pub struct PriorityRegister {
 
 /// End of Interrupt Register (EOI).
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct EndOfInterrupt {
 	pub eoi: u32,
 	#[skip]
@@ -142,7 +142,7 @@ pub struct EndOfInterrupt {
 
 /// Logical Destination Register.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct LogicalDestination {
 	#[skip]
 	__: B24,
@@ -153,7 +153,7 @@ pub struct LogicalDestination {
 
 /// Destination Format Register.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct DestinationFormat {
 	#[skip]
 	__: B28,
@@ -164,7 +164,7 @@ pub struct DestinationFormat {
 
 /// Spurious Interrupt Vector Register.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct SpuriousInterruptVector {
 	pub spurious_vector: u8,
 	pub apic_enabled: B1,
@@ -179,7 +179,7 @@ pub struct SpuriousInterruptVector {
 /// [`ISR`](LocalApic::in_service), [`TMR`](LocalApic::trigger_mode)
 /// or [`IRR`](LocalApic::interrupt_request).
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct BitfieldRegister {
 	pub bitfield: u32,
 	#[skip]
@@ -188,7 +188,7 @@ pub struct BitfieldRegister {
 
 /// Error Status Register (ESR).
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct ErrorStatus {
 	pub send_cs: B1,
 	pub recv_cs: B1,
@@ -207,7 +207,7 @@ pub struct ErrorStatus {
 
 /// Interrupt Command Register Low (bits 31:0).
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct InterruptCmdLow {
 	pub vector: u8,
 	pub delivery_mode: B3,
@@ -228,7 +228,7 @@ pub struct InterruptCmdLow {
 
 /// Interrupt Command Register High (bits 63:32).
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct InterruptCmdHigh {
 	#[skip]
 	__: B24,
@@ -239,7 +239,7 @@ pub struct InterruptCmdHigh {
 
 /// Timer Local Vector Table Entry.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct TimerLVT {
 	pub vector: u8,
 	#[skip]
@@ -257,7 +257,7 @@ pub struct TimerLVT {
 
 /// Thermal Local Vector Table Entry.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct ThermalLVT {
 	pub vector: u8,
 	pub delivery_mode: B3,
@@ -275,7 +275,7 @@ pub struct ThermalLVT {
 
 /// Performance Counter Local Vector Table Entry.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct PerfLVT {
 	pub vector: u8,
 	pub delivery_mode: B3,
@@ -294,7 +294,7 @@ pub struct PerfLVT {
 /// Structure for [Local Interrupt 0](LocalApic::lint0_lvt) and
 /// [1](LocalApic::lint1_lvt) Vector Table Entries.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct LIntLVT {
 	pub vector: u8,
 	pub delivery_mode: B3,
@@ -313,7 +313,7 @@ pub struct LIntLVT {
 
 /// Error Vector Table Entry.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct ErrorLVT {
 	pub vector: u8,
 	#[skip]
@@ -331,7 +331,7 @@ pub struct ErrorLVT {
 /// Structure for [Initial](LocalApic::timer_icr) and
 /// [Current](LocalApic::timer_ccr) Timer Count Registers.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct TimerCount {
 	pub count: u32,
 	#[skip]
@@ -340,7 +340,7 @@ pub struct TimerCount {
 
 /// Timer Divide Configuration Register.
 #[bitfield(bits = 128)]
-#[derive(Copy, Clone, Default, Debug)]
+#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
 pub struct TimerDivConf {
 	pub divisor: B4,
 	#[skip]
