@@ -3,6 +3,7 @@
 #![forbid(missing_docs)]
 #![forbid(missing_copy_implementations)]
 #![forbid(missing_debug_implementations)]
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
 
 //! A self-contained crate implementing safe types for the local APIC
 //! registers on x86_64 systems.

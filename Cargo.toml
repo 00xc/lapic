@@ -13,3 +13,6 @@ modular-bitfield = "0.11.2"
 
 [dev-dependencies]
 memoffset = "0.9.0"
+
+[package.metadata.docs.rs]
+rustdoc-args = ["--cfg", "docsrs"]
