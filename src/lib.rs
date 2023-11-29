@@ -28,12 +28,13 @@
 //! the [modular_bitfield](https://docs.rs/modular-bitfield/latest/modular_bitfield/)
 //! crate.
 
+use core::fmt;
 use modular_bitfield::bitfield;
 use modular_bitfield::specifiers::*;
 
 /// Local APIC registers.
 #[repr(C, align(16))]
-#[derive(Copy, Clone, Default, Debug, PartialEq, Eq)]
+#[derive(Copy, Clone, Default, PartialEq, Eq)]
 pub struct LocalApic {
 	__reserved1: [Reserved; 2],
 	/// APIC ID Register.
@@ -89,6 +90,37 @@ pub struct LocalApic {
 	/// Timer Divide Configuration Register.
 	pub timer_dcr: TimerDivConf,
 	__reserved10: Reserved,
+}
+
+impl fmt::Debug for LocalApic {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		f.debug_struct("LocalApic")
+			.field("apic_id", &self.apic_id)
+			.field("apic_version", &self.apic_version)
+			.field("task_priority", &self.task_priority)
+			.field("arb_priority", &self.arb_priority)
+			.field("processor_priority", &self.processor_priority)
+			.field("eoi", &self.eoi)
+			.field("logical_dst", &self.logical_dst)
+			.field("dst_format", &self.dst_format)
+			.field("spurious_iv", &self.spurious_iv)
+			.field("in_service", &self.in_service)
+			.field("trigger_mode", &self.trigger_mode)
+			.field("interrupt_request", &self.interrupt_request)
+			.field("error_status", &self.error_status)
+			.field("interrupt_cmd_low", &self.interrupt_cmd_low)
+			.field("interrupt_cmd_high", &self.interrupt_cmd_high)
+			.field("timer_lvt", &self.timer_lvt)
+			.field("thermal_lvt", &self.thermal_lvt)
+			.field("performance_lvt", &self.performance_lvt)
+			.field("lint0_lvt", &self.lint0_lvt)
+			.field("lint1_lvt", &self.lint1_lvt)
+			.field("error_lvt", &self.error_lvt)
+			.field("timer_icr", &self.timer_icr)
+			.field("timer_ccr", &self.timer_ccr)
+			.field("timer_dcr", &self.timer_dcr)
+			.finish()
+	}
 }
 
 #[repr(transparent)]
